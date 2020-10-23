@@ -116,7 +116,7 @@ impl<'reader> Drop for IntoStream<'reader> {
     fn drop(&mut self) {
         if self.cancel_on_drop {
             if let Some(reader) = self.reader.take() {
-                let _ = reader.as_raw().cancel().catch(&Closure::once(|_| {}));
+                drop(reader.as_raw().cancel().now_or_never());
             }
         }
     }
