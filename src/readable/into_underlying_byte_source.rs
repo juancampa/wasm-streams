@@ -31,10 +31,10 @@ impl IntoUnderlyingByteSource {
     }
 }
 
-#[wasm_bindgen(inline_js = "export function bytes_literal() { return \"bytes\"; }")]
-extern "C" {
-    fn bytes_literal() -> JsValue;
-}
+// #[wasm_bindgen(inline_js = "export function bytes_literal() { return \"bytes\"; }")]
+// extern "C" {
+//     fn bytes_literal() -> JsValue;
+// }
 
 #[allow(clippy::await_holding_refcell_ref)]
 #[wasm_bindgen]
@@ -48,7 +48,8 @@ impl IntoUnderlyingByteSource {
     // See https://crbug.com/1187774
     #[wasm_bindgen(getter, js_name = type)]
     pub fn type_(&self) -> JsValue {
-        bytes_literal()
+        "bytes".into()
+        // bytes_literal()
     }
 
     #[wasm_bindgen(getter, js_name = autoAllocateChunkSize)]
